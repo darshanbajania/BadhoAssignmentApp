@@ -11,7 +11,7 @@ const LaunchCard = ({ item, expandedID, handleShowDetails }) => {
         <View
             style={{
                 backgroundColor: '#1B1C1F',
-                marginBottom: 20,
+                marginBottom: 25,
                 borderRadius: 8,
                 padding: 10,
 
@@ -23,7 +23,8 @@ const LaunchCard = ({ item, expandedID, handleShowDetails }) => {
                     style={{
                         color: 'white',
                         fontSize: 18,
-                        width: '70%'
+                        width: '70%',
+                        fontWeight: '700'
                     }}
                 > {item.mission_name}</Text>
 
@@ -36,22 +37,27 @@ const LaunchCard = ({ item, expandedID, handleShowDetails }) => {
                 > {dayjs(item.launch_date_local).format('DD MMM YYYY')}</Text>
 
             </View>
-            <View style={{ minHeight: 60, marginTop: 10 }}>
+            <View style={{ minHeight: 60, marginTop: 20 }}>
 
 
                 <Text
                     numberOfLines={expandedID === item.id && showDetails ? 0 : 2}
                     style={{
                         color: '#929292',
-                        fontSize: 14
+                        textAlign: 'justify',
+                        margin: 0
                     }}
-                > {item.details ? item.details : 'No description'}</Text>
+                > <Text style={{ margin: 0, color: 'white', fontWeight: '700' }}>Description: </Text>{item.details ? item.details : 'No description'}</Text>
 
 
             </View>
             {
                 expandedID === item.id && showDetails ?
                     <View style={{ marginVertical: 20 }}>
+                        <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+                            <Text style={{ color: 'white', width: '30%' }}>Mission:</Text>
+                            <Text style={{ color: '#B9B9B9', width: '60%' }}>{item.mission_name}</Text>
+                        </View>
                         <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                             <Text style={{ color: 'white', width: '30%' }}>Rocket:</Text>
                             <Text style={{ color: '#B9B9B9' }}>{item.rocket.rocket_name}</Text>
@@ -80,17 +86,18 @@ const LaunchCard = ({ item, expandedID, handleShowDetails }) => {
                                     item.links.flickr_images.length > 0
                                         ? item.links.flickr_images.map((img, index) => {
                                             return (<Pressable
-
+                                                style={{ marginRight: 15 }}
                                                 onPress={() => {
                                                     Linking.openURL(img)
                                                 }}
                                                 key={index}>
 
                                                 <Image
-
-                                                    loadingIndicatorSource={require('../ProjectFiles/assets/image_placeholder.png')}
-                                                    // defaultSource={require('../ProjectFiles/assets/image_placeholder.png')}
-                                                    style={{ height: 80, width: 80, marginRight: 10, borderRadius: 3 }}
+                                                    // resizeMode='center'
+                                                    progressiveRenderingEnabled={true}
+                                                    // loadingIndicatorSource={require('../ProjectFiles/assets/loading.png')}
+                                                    defaultSource={require('../ProjectFiles/assets/image_placeholder2.png')}
+                                                    style={{ height: 80, width: 80, borderRadius: 3, alignSelf: 'center' }}
                                                     source={{ uri: img }}
                                                 />
                                             </Pressable>
@@ -104,7 +111,7 @@ const LaunchCard = ({ item, expandedID, handleShowDetails }) => {
                     </View> : null
             }
 
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 0, alignItems: 'center' }}>
                 <View>
 
                     <Pressable
@@ -112,13 +119,12 @@ const LaunchCard = ({ item, expandedID, handleShowDetails }) => {
                             setShowDetails(!showDetails)
                             handleShowDetails(item.id)
                         }}
-                        style={{ backgroundColor: 'black', padding: 3, paddingHorizontal: 8, borderRadius: 4, margin: 0 }}>
+                        style={{ backgroundColor: '#0F0F11', padding: 5, paddingHorizontal: 16, borderRadius: 4, margin: 0 }}>
                         <Text style={{
                             color: 'white',
-                            fontSize: 14,
                             margin: 0,
                             padding: 0,
-
+                            fontWeight: '700'
                         }}>{expandedID === item.id && showDetails ? 'Close' : 'Details'}</Text>
                     </Pressable>
                 </View>
@@ -131,9 +137,9 @@ const LaunchCard = ({ item, expandedID, handleShowDetails }) => {
                         style={{}}>
                         <Text style={{
                             color: item.links.article_link ? 'white' : '#929292',
-                            fontSize: 14,
                             margin: 0,
                             padding: 0,
+                            fontWeight: '700'
 
                         }}>Article</Text>
                     </Pressable>
@@ -143,12 +149,12 @@ const LaunchCard = ({ item, expandedID, handleShowDetails }) => {
                         onPress={() => {
                             Linking.openURL(item.links.video_link)
                         }}
-                        style={{ marginLeft: 10 }}>
+                        style={{ marginLeft: 20 }}>
                         <Text style={{
                             color: item.links.video_link ? 'white' : '#929292',
-                            fontSize: 14,
                             margin: 0,
                             padding: 0,
+                            fontWeight: '700'
 
                         }}>Video</Text>
                     </Pressable>

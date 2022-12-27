@@ -62,7 +62,7 @@ const SpaceXLaunchList = () => {
 
     useEffect(() => {
         // console.log(data, loading, error)
-        console.log('refetced')
+        console.log('refetched')
     }, [data, error, loading])
     // useEffect(() => {
     //     const client = new ApolloClient({
@@ -92,10 +92,14 @@ const SpaceXLaunchList = () => {
             source={require('./assets/HomeImage.png')}
         >
 
-            <Text style={{ color: 'white', textAlign: 'center', top: '80%' }}>Loading...</Text>
+            <Text style={{ color: 'white', textAlign: 'center', top: '80%', fontSize: 20, fontWeight: '700' }}>Loading...</Text>
         </ImageBackground>
     </View>
-    if (error) return <Text>Error : {error.message}</Text>;
+    if (error) return <View style={{ backgroundColor: 'white', flex: 1 }}>
+
+        <Text style={{ textAlign: 'center', color: 'black', fontSize: 20, top: '50%' }}>Error : {error.message}</Text>
+    </View>
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#000000', }}>
             <Image style={{
